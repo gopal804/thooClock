@@ -18,11 +18,24 @@
 <br/><br/>
 <input type="text" id="altime" placeholder="hh:mm"/><br><br>
 <a href="javascript:void(0)" id="set">set Alarm</a>
+<button onclick="stopClock()" id="stopButton">stop clock</button>
 
 <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
-<script language="javascript" type="text/javascript" src="js/jquery.thooClock.min.js"></script>  
+<script language="javascript" type="text/javascript" src="js/jquery.thooClock.js"></script>  
 <script language="javascript">
-	var intVal, myclock;
+	function stopClock() {
+		$.fn.thooClock.stopClock();
+		$("#stopButton").get(0).innerHTML = "start clock";
+		$("#stopButton").unbind('click', stopClock).click(restartClock);
+	}
+
+	function restartClock() {
+		$.fn.thooClock.restartClock();
+		$("#stopButton").get(0).innerHTML = "stop clock";		
+		$("#stopButton").unbind('click', restartClock).click(stopClock);
+	}
+
+	var intVal, myclock, stop = false;
 
 	$(window).resize(function(){
 		window.location.reload()
@@ -58,6 +71,7 @@
 			showNumerals:true,
 			brandText:'THOOYORK',
 			brandText2:'Germany',
+			// isStopped: true,
 			onEverySecond:function(){
 				//callback that should be fired every second
 				//console.log(new Date().getSeconds());
@@ -70,6 +84,15 @@
 				$('body').css('background-color','#FCFCFC');
 			}
 		});
+
+		setTimeout(()=> {
+			// console.log("isStopped: " + $.fn.thooClock.isStopped())
+
+			if($.fn.thooClock.isStopped() === true) {
+				// console.log("isStopped")
+				stopClock();
+			}
+		}, 200);
 
 	});
 
@@ -99,6 +122,7 @@
 			$('body').css('background-color',color);
 			intVal = setTimeout(function(){alarmBackground(y);},100);
 	}
+
 </script>
 
 </body>

@@ -63,7 +63,8 @@
                 sweepingMinutes: true,
                 sweepingSeconds: false,
                 numeralFont: 'arial',
-                brandFont: 'arial'
+                brandFont: 'arial',
+                isStopped: false
             };
 
             settings = $.extend({}, defaults, options);
@@ -97,6 +98,8 @@
             el.sweepingMinutes = settings.sweepingMinutes;
             el.sweepingSeconds = settings.sweepingSeconds;
 
+            el.isStopped = settings.isStopped;
+
             x=0; //loopCounter for Alarm
             
             cnv = document.createElement('canvas');
@@ -123,6 +126,18 @@
                     $(el).trigger('offAlarm');
             };
 
+            $.fn.thooClock.stopClock = function(){
+                el.isStopped = true;
+            }
+
+            $.fn.thooClock.isStopped = function(){
+                return el.isStopped;
+            }
+
+            $.fn.thooClock.restartClock = function(){
+                el.isStopped = false;
+                startClock();
+            }
 
             function checkAlarmTime(newtime){
                 var thedate;
@@ -467,7 +482,9 @@
                    $(el).trigger('onAlarm');
                 }
                 
-                window.requestAnimationFrame(function(){startClock(x)});
+                if(!el.isStopped) {
+                    window.requestAnimationFrame(function(){startClock(x)});
+                }
 
             }
 
