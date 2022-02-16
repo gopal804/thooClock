@@ -64,7 +64,8 @@
                 sweepingSeconds: false,
                 numeralFont: 'arial',
                 brandFont: 'arial',
-                isStopped: false
+                isStopped: false,
+                showSecondHand: true
             };
 
             settings = $.extend({}, defaults, options);
@@ -99,6 +100,7 @@
             el.sweepingSeconds = settings.sweepingSeconds;
 
             el.isStopped = settings.isStopped;
+            el.showSecondHand = settings.showSecondHand;
 
             x=0; //loopCounter for Alarm
             
@@ -459,7 +461,10 @@
                 }
                 drawHourHand(h, el.hourHandColor);
                 drawMinuteHand(m, el.minuteHandColor);
-                drawSecondHand(ms, s, el.secondHandColor);
+                if(el.showSecondHand) {
+                    drawSecondHand(ms, s, el.secondHandColor);
+                }
+                
 
                 //trigger every second custom event
                 if(y !== s){

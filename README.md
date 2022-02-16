@@ -60,6 +60,7 @@ Options
     sweepingSeconds: false,                   // sweeping second hand true/false true is like automatic clock, false is ticking
     sweepingMinutes: true,                   // sweeping minute hand true/false
     isStopped: false,                        // whether the clock is stopped, or running, default: false
+    showSecondHand: true,                    // whether the second hand will be shown, default: true
     onAlarm:function(){                      // alarm callback function 
       //callback on Alarm
     },

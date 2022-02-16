@@ -72,6 +72,7 @@
 			brandText:'THOOYORK',
 			brandText2:'Germany',
 			// isStopped: true,
+			showSecondHand: false,
 			onEverySecond:function(){
 				//callback that should be fired every second
 				//console.log(new Date().getSeconds());
@@ -85,18 +86,13 @@
 			}
 		});
 
-		setTimeout(()=> {
-			// console.log("isStopped: " + $.fn.thooClock.isStopped())
-
+		setTimeout(()=> { // just to double check that the config options were initially set to stopped
 			if($.fn.thooClock.isStopped() === true) {
-				// console.log("isStopped")
 				stopClock();
 			}
 		}, 200);
 
 	});
-
-
 
 	$('#turnOffAlarm').click(function(){
 		$.fn.thooClock.clearAlarm();
