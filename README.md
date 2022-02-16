@@ -59,6 +59,7 @@ Options
     brandFont: 'helvetica',                  // font face for brandText
     sweepingSeconds: false,                   // sweeping second hand true/false true is like automatic clock, false is ticking
     sweepingMinutes: true,                   // sweeping minute hand true/false
+    isStopped: false,                        // whether the clock is stopped, or running, default: false
     onAlarm:function(){                      // alarm callback function 
       //callback on Alarm
     },
@@ -92,4 +93,19 @@ From a date object:
 **Clear Alarm:**
 <pre>
   $.fn.thooClock.clearAlarm();
+</pre>
+
+**Stop clock:**
+<pre>
+  $.fn.thooClock.stopClock();
+</pre>
+
+**Restart clock:**
+<pre>
+  $.fn.thooClock.restartClock();
+</pre>
+
+**Check if clock is stopped:**
+<pre>
+  $.fn.thooClock.isStopped();
 </pre>
