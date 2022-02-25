@@ -141,6 +141,12 @@
                 startClock();
             }
 
+            $.fn.thooClock.setTimeAndStop = function(t){
+                el.isStopped = true;
+                validateAndSetTime(t);
+                startClock();
+            }            
+
             function checkAlarmTime(newtime){
                 var thedate;
                 if(newtime instanceof Date){
@@ -165,6 +171,29 @@
                 return thedate;
             };
         
+            function validateAndSetTime(t){
+                if(!t) {
+                    el.time = null;
+                } else {
+                    let hour = 0;
+                    let min = 0;
+                    let sec = 0;
+                    let parts = t.split(":");
+                    if(parts.length >= 1) {
+                        hour = parseInt(parts[0], 0);
+                    }
+                    if(parts.length >= 2) {
+                        min = parseInt(parts[1], 0);
+                    }
+                    if(parts.length >= 3) {
+                        sec = parseInt(parts[2], 0);
+                    }
+                    let d = new Date();
+                    d.setHours(hour, min, sec);
+                    el.time = d;
+                    // console.log(d)
+                }
+            }
 
             function toRadians(deg){
                 return ( Math.PI / 180 ) * deg;
@@ -430,7 +459,12 @@
                     allAlarmM,
                     atime;
 
-                theDate = new Date();
+                    if(el.time) {
+                        theDate = el.time;
+                        el.isStopped = true;
+                    } else {
+                        theDate = new Date();
+                    }
 
                 if(el.timeCorrection){
                     if(el.timeCorrection.operator === '+'){

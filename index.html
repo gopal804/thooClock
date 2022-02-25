@@ -17,8 +17,11 @@
 
 <br/><br/>
 <input type="text" id="altime" placeholder="hh:mm"/><br><br>
-<a href="javascript:void(0)" id="set">set Alarm</a>
-<button onclick="stopClock()" id="stopButton">stop clock</button>
+<a href="javascript:void(0)" id="set">set Alarm</a><br><br>
+<button onclick="stopClock()" id="stopButton">stop clock</button><br><br>
+<input type="text" id="timeToSet" placeholder="hh:mm:ss"/>
+<button onclick="setTimeAndStop()" id="stopButton">set time and stop clock</button>
+
 
 <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script language="javascript" type="text/javascript" src="js/jquery.thooClock.js"></script>  
@@ -33,6 +36,11 @@
 		$.fn.thooClock.restartClock();
 		$("#stopButton").get(0).innerHTML = "stop clock";		
 		$("#stopButton").unbind('click', restartClock).click(stopClock);
+	}
+
+	function setTimeAndStop() {
+		console.log()
+		$.fn.thooClock.setTimeAndStop($("#timeToSet").val())
 	}
 
 	var intVal, myclock, stop = false;
@@ -72,7 +80,7 @@
 			brandText:'THOOYORK',
 			brandText2:'Germany',
 			// isStopped: true,
-			showSecondHand: false,
+			// showSecondHand: false,
 			onEverySecond:function(){
 				//callback that should be fired every second
 				//console.log(new Date().getSeconds());
