@@ -115,3 +115,8 @@ From a date object:
 <pre>
   $.fn.thooClock.setTimeAndStop(<"hh:mm:ss">);
 </pre>
+
+**Get the time currently displayed:**
+<pre>
+  $.fn.thooClock.getTimeDisplayed();
+</pre>

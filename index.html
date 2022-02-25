@@ -20,12 +20,24 @@
 <a href="javascript:void(0)" id="set">set Alarm</a><br><br>
 <button onclick="stopClock()" id="stopButton">stop clock</button><br><br>
 <input type="text" id="timeToSet" placeholder="hh:mm:ss"/>
-<button onclick="setTimeAndStop()" id="stopButton">set time and stop clock</button>
+<button onclick="setTimeAndStop()" id="stopButton">set time and stop clock</button><br/>
+<input class="slider" type="range" min="-30" max="30" value="0" id="adjuster" onchange="adjustClock()">
+<div id="displayedTime">
 
-
+</div>
 <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script language="javascript" type="text/javascript" src="js/jquery.thooClock.js"></script>  
 <script language="javascript">
+	function showTimeDisplayed() {
+		document.getElementById("displayedTime").innerHTML = $.fn.thooClock.getTimeDisplayed();
+	}
+	setInterval(showTimeDisplayed, 2000);
+
+	function adjustClock() {
+		console.log("adjusted: " + document.getElementById("adjuster").value)
+		document.getElementById("adjuster").value = 0;
+	}
+
 	function stopClock() {
 		$.fn.thooClock.stopClock();
 		$("#stopButton").get(0).innerHTML = "start clock";
@@ -39,7 +51,6 @@
 	}
 
 	function setTimeAndStop() {
-		console.log()
 		$.fn.thooClock.setTimeAndStop($("#timeToSet").val())
 	}
 

@@ -28,7 +28,8 @@
                 alarmHandTipColor,
                 timeCorrection,
                 x,
-                y;
+                y,
+                timeDisplayed;
 
        defaults = {
                 size: 250,
@@ -145,7 +146,11 @@
                 el.isStopped = true;
                 validateAndSetTime(t);
                 startClock();
-            }            
+            }         
+            
+            $.fn.thooClock.getTimeDisplayed = function () {
+                return timeDisplayed;
+            }
 
             function checkAlarmTime(newtime){
                 var thedate;
@@ -524,6 +529,8 @@
                 if(!el.isStopped) {
                     window.requestAnimationFrame(function(){startClock(x)});
                 }
+
+                timeDisplayed = theDate;
 
             }
 
