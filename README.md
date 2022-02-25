@@ -111,12 +111,7 @@ From a date object:
   $.fn.thooClock.isStopped();
 </pre>
 
-**Check if clock is stopped:**
-<pre>
-  $.fn.thooClock.isStopped();
-</pre>
-
 **Set time and stop:**
 <pre>
-  $.fn.thooClock.isStopped(<"hh:mm:ss">);
+  $.fn.thooClock.setTimeAndStop(<"hh:mm:ss">);
 </pre>
