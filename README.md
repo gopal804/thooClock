@@ -110,3 +110,13 @@ From a date object:
 <pre>
   $.fn.thooClock.isStopped();
 </pre>
+
+**Check if clock is stopped:**
+<pre>
+  $.fn.thooClock.isStopped();
+</pre>
+
+**Set time and stop:**
+<pre>
+  $.fn.thooClock.isStopped(<"hh:mm:ss">);
+</pre>
