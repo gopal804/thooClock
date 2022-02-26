@@ -21,6 +21,7 @@
 <button onclick="stopClock()" id="stopButton">stop clock</button><br><br>
 <input type="text" id="timeToSet" placeholder="hh:mm:ss"/>
 <button onclick="setTimeAndStop()" id="stopButton">set time and stop clock</button><br/>
+<button onclick="setTime()" id="stopButton">set time</button><br/>
 <input class="slider" type="range" min="-30" max="30" value="0" id="adjuster" onchange="adjustClock()">
 <div id="displayedTime">
 
@@ -52,6 +53,10 @@
 
 	function setTimeAndStop() {
 		$.fn.thooClock.setTimeAndStop($("#timeToSet").val())
+	}
+
+	function setTime() {
+		$.fn.thooClock.setTime($("#timeToSet").val())
 	}
 
 	var intVal, myclock, stop = false;
@@ -90,8 +95,6 @@
 			showNumerals:true,
 			brandText:'THOOYORK',
 			brandText2:'Germany',
-			// isStopped: true,
-			// showSecondHand: false,
 			onEverySecond:function(){
 				//callback that should be fired every second
 				//console.log(new Date().getSeconds());

@@ -144,12 +144,24 @@
 
             $.fn.thooClock.setTimeAndStop = function(t){
                 el.isStopped = true;
+                $.fn.thooClock.setTime(t);
+            }         
+
+            $.fn.thooClock.setTime = function(t){
                 validateAndSetTime(t);
                 startClock();
             }         
-            
+
             $.fn.thooClock.getTimeDisplayed = function () {
                 return timeDisplayed;
+            }
+
+            $.fn.thooClock.setTimeCorrection = function (x) {
+                el.timeCorrection = x;
+            }
+
+            $.fn.thooClock.getTimeCorrection = function () {
+                return { ...el.timeCorrection };
             }
 
             function checkAlarmTime(newtime){
@@ -179,10 +191,17 @@
             function validateAndSetTime(t){
                 if(!t) {
                     el.time = null;
+                    
                 } else {
                     let hour = 0;
                     let min = 0;
                     let sec = 0;
+
+                    // offsets
+                    let op = '-';
+                    let h = 0;
+                    let m = 0;
+
                     let parts = t.split(":");
                     if(parts.length >= 1) {
                         hour = parseInt(parts[0], 0);
@@ -194,8 +213,31 @@
                         sec = parseInt(parts[2], 0);
                     }
                     let d = new Date();
-                    d.setHours(hour, min, sec);
-                    el.time = d;
+                    if (hour > d.getHours() || (hour === d.getHours() && min > d.getMinutes())) {
+                        op = '+';
+                        h = hour - d.getHours();
+                        m = min - d.getMinutes();
+
+                    } else {
+                        op = '-';
+                        h = d.getHours() - hour;
+                        m = d.getMinutes() - min;
+                    }
+
+                    if(m < 0) {
+                        h--;
+                        m+=60;
+                    }
+
+                    el.timeCorrection = {
+                        operator: op,
+                        hours: h,
+                        minutes: m
+                    }
+                    
+
+                    // d.setHours(hour, min, sec);
+                    // el.time = d;
                     // console.log(d)
                 }
             }
