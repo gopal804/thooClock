@@ -164,6 +164,14 @@
                 return { ...el.timeCorrection };
             }
 
+            $.fn.thooClock.adjustClock = function (adjustedMins) {
+                let mm = parseInt(adjustedMins, 0);
+                if(el.timeCorrection.operator === '-') {
+                    mm = 0 - mm;
+                } 
+                el.timeCorrection.minutes += mm;
+            }
+
             function checkAlarmTime(newtime){
                 var thedate;
                 if(newtime instanceof Date){

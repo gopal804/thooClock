@@ -22,10 +22,14 @@
 <input type="text" id="timeToSet" placeholder="hh:mm:ss"/>
 <button onclick="setTimeAndStop()" id="stopButton">set time and stop clock</button><br/>
 <button onclick="setTime()" id="stopButton">set time</button><br/>
-<input class="slider" type="range" min="-30" max="30" value="0" id="adjuster" onchange="adjustClock()">
-<div id="displayedTime">
 
+<button onclick="adjustClock('-1')">v</button>
+<input class="slider" type="range" min="-30" max="30" value="0" id="adjuster" onchange="adjustClock()">
+<button onclick="adjustClock('1')">^</button>
+
+<div id="displayedTime">
 </div>
+
 <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script language="javascript" type="text/javascript" src="js/jquery.thooClock.js"></script>  
 <script language="javascript">
@@ -34,9 +38,14 @@
 	}
 	setInterval(showTimeDisplayed, 2000);
 
-	function adjustClock() {
-		console.log("adjusted: " + document.getElementById("adjuster").value)
-		document.getElementById("adjuster").value = 0;
+	function adjustClock(m) {
+		let mins = m;
+		if(!m) {
+			mins = document.getElementById("adjuster").value;
+			document.getElementById("adjuster").value = 0;
+		}
+		console.log("adjusted: " + mins)
+		$.fn.thooClock.adjustClock(mins);
 	}
 
 	function stopClock() {
